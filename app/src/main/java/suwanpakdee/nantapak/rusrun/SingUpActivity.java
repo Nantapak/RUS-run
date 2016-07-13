@@ -14,6 +14,7 @@ public class SingUpActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton avatar0RadioButton, avatar1RadioButton,
             avatar2RadioButton, avatar3RadioButton, avatar4RadioButton;
+    private String nameString, userString, passwordString, avatarString;
 
 
     @Override
@@ -35,6 +36,12 @@ public class SingUpActivity extends AppCompatActivity {
     }   // Main Method
 
     public void clickSignUpSign(View view) {
+
+        //Get Value from Edit Text
+        nameString = nameEditText.getText().toString().trim();
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
 
     } // clickSignUp
 
