@@ -42,6 +42,17 @@ public class SingUpActivity extends AppCompatActivity {
         userString = userEditText.getText().toString().trim();
         passwordString = passwordEditText.getText().toString().trim();
 
+        //Check Space
+        if (nameString.equals("") || userString.equals("") || passwordString.equals("")) {
+
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "มีช่องว่าง", "กรุณาเติมเต็มช่องที่ว่างเปล่าไม่มีอะไรเลยเติมให้มันเต็มเข้าใจไหม");
+
+
+
+        }
+
+
 
     } // clickSignUp
 
