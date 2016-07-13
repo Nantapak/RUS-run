@@ -33,6 +33,33 @@ public class SingUpActivity extends AppCompatActivity {
         avatar3RadioButton = (RadioButton) findViewById(R.id.radioButton4);
         avatar4RadioButton = (RadioButton) findViewById(R.id.radioButton5);
 
+        //Radio Controller
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                switch (checkedId) {
+
+                    case R.id.radioButton:
+                        avatarString = "0";
+                        break;
+                    case R.id.radioButton2:
+                        avatarString = "1";
+                        break;
+                    case R.id.radioButton3:
+                        avatarString = "2";
+                        break;
+                    case R.id.radioButton4:
+                        avatarString = "3";
+                        break;
+                    case R.id.radioButton5:
+                        avatarString = "4";
+                        break;
+                    
+                }   // Switch
+            }
+        });
+
     }   // Main Method
 
     public void clickSignUpSign(View view) {
@@ -47,13 +74,31 @@ public class SingUpActivity extends AppCompatActivity {
 
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "มีช่องว่าง", "กรุณาเติมเต็มช่องที่ว่างเปล่าไม่มีอะไรเลยเติมให้มันเต็มเข้าใจไหม");
-
-
-
+        } else if (checkchoose()) {
+            //Checked
+        } else {
+            //Un Check
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ยังไม่เลือก Avatar",
+                    "กรุณาเลือก Avatar ด้วยครับ");
+            
         }
 
 
 
     } // clickSignUp
+
+    private boolean checkchoose() {
+
+        boolean status = true;
+
+        status = avatar0RadioButton.isChecked() ||
+                avatar1RadioButton.isChecked() ||
+                avatar2RadioButton.isChecked() ||
+                avatar3RadioButton.isChecked() ||
+                avatar4RadioButton.isChecked();
+
+        return status;
+    }
 
 }   // Main Class
