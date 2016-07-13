@@ -108,7 +108,7 @@ public class SingUpActivity extends AppCompatActivity {
                 .add("Name", nameString)
                 .add("User", userString)
                 .add("Password", passwordString)
-                .add("Avatar", avatarString)
+                .add("Avata", avatarString)
                 .build();
         Request.Builder builder = new Request.Builder();
         Request request = builder.url(urlPHP).post(requestBody).build();
@@ -116,12 +116,11 @@ public class SingUpActivity extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                finish();
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
-
+                finish();
             }
         });
 
