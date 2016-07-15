@@ -87,46 +87,59 @@ public class MainActivity extends AppCompatActivity {
 
             Log.d("RusV1", "JSON ==> " + s);
 
-            try {
+            if (s != null) {
 
-                JSONArray jsonArray = new JSONArray(s);
+                try {
 
-                for (int i=0;i<jsonArray.length();i+=1) {
+                    JSONArray jsonArray = new JSONArray(s);
 
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    for (int i=0;i<jsonArray.length();i+=1) {
 
-                    if (myUserString.equals(jsonObject.getString("User"))) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        statusABoolean = false;
-                        truePassword = jsonObject.getString("Password");
-                        myNameString = jsonObject.getString("Name");
-                        myIDString = jsonObject.getString("id");
-                        myAvataString = jsonObject.getString("Avata");
+                        if (myUserString.equals(jsonObject.getString("User"))) {
+
+                            statusABoolean = false;
+                            truePassword = jsonObject.getString("Password");
+                            myNameString = jsonObject.getString("Name");
+                            myIDString = jsonObject.getString("id");
+                            myAvataString = jsonObject.getString("Avata");
+                        }
+                    }   //for
+
+                    if (statusABoolean) {
+
+                        MyAlert myAlert = new MyAlert();
+                        myAlert.myDialog(context, "User ไม่ถูกต้อง",
+                                "ไม่มี" + myUserString + "ในฐานข้อมูลของเรา");
+
+                    } else if (myPasswordString.equals(truePassword)) {
+                        //Password True
+                        Toast.makeText(context, "Welcome "+ myNameString, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+
+                        intent.putExtra("loginID", myIDString);
+
+                        startActivity(intent);
+
+                    } else {
+                        //Password False
+                        MyAlert myAlert = new MyAlert();
+                        myAlert.myDialog(context, "Password False",
+                                "Please Try Again Password False");
                     }
-                }   //for
 
-                if (statusABoolean) {
-
-                    MyAlert myAlert = new MyAlert();
-                    myAlert.myDialog(context, "User ไม่ถูกต้อง",
-                            "ไม่มี" + myUserString + "ในฐานข้อมูลของเรา");
-
-                } else if (myPasswordString.equals(truePassword)) {
-                    //Password True
-                    Toast.makeText(context, "Welcome "+ myNameString, Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                    startActivity(intent);
-
-                } else {
-                    //Password False
-                    MyAlert myAlert = new MyAlert();
-                    myAlert.myDialog(context, "Password False",
-                            "Please Try Again Password False");
+                } catch (Exception e) {
+                    Log.d("RusV1", "e onPost ==>" + e.toString());
                 }
 
-            } catch (Exception e) {
-                Log.d("RusV1", "e onPost ==>" + e.toString());
+            } else {
+
+                MyAlert myAlert = new MyAlert();
+                myAlert.myDialog(context, "ไม่สามารถเชื่อมต่อ Server ได้",
+                        "กรุณาตรวจสอบการเชื่อมต่อ Internet");
+
             }
 
         }   // onPost
